@@ -2,6 +2,8 @@ package petunia_store_01;
 
 import java.util.Scanner;
 
+import petunia_store_01_Controller.produtoController;
+import petunia_store_01_Exceptions.jaExiste;
 import petunia_store_01_model.Estendida;
 import petunia_store_01_model.Produto;
 import petunia_store_01_repository.Repository;
@@ -16,13 +18,14 @@ public class Menu {
 		Scanner leia = new Scanner(System.in);
 	
 		Repository produtoRepository = new Repository();
-		
+		produtoController produtoController = new produtoController();
 		int opcao;
-		String nome, marca;
+		String nome, marca, produto;
 		Double preco;
 		Float codigo;
+	
 		
-		
+		do {
 		System.out.println("************************************************************************");
 		System.out.println("\n");
 		System.out.println("                PETUNIA STORE - O MELHOR PREÇO É AQUI!                  ");
@@ -52,6 +55,8 @@ public class Menu {
 		switch (opcao) {
 		case 1:
 			System.out.println("Cadastrar produtos\n\n");
+			try {
+			
 			System.out.println("Código: ");
 			codigo = leia.nextFloat();
 			System.out.println("Nome: ");
@@ -61,18 +66,27 @@ public class Menu {
 			System.out.println("Marca: ");
 			marca = leia.nextLine();
 			
-			Estendida produto = new Estendida(codigo, nome, preco, marca);
+			Produto produto = new Produto(codigo, nome, preco, marca);
+			produtoController.cadastrarProduto(produto);
+			System.out.println("Produto Cadastrado com sucesso!");
+			} catch (jaExiste e) {
+				System.out.println("Produto já existe!");
+			}
 			break;
 		case 2:
 			System.out.println("Listar todos os produtos");
-			for (Produto p: produtoRepository.listarProdutos());
+			for (Produto p: produtoController.listarProdutos()) {
+				System.out.println(p);
+			}
 			break;
 		case 3:
 			System.out.println("Buscar produtos por código");
+			try {
 			System.out.print("Código: ");
 			int codigoBuscar = leia.nextInt();
-			Produto Encontrado = produtoRepository.buscarProdutosPorCodigo(codigoBusca);
-			
+			Produto Encontrado = produtoController.buscarProdutosPorCodigo(codigoBusca);
+			char[] produtoEncontrado;
+			System.out.println(produtoEncontrado);
 			if (Encontrado != null) {
 				System.out.println("Produto Encontrado");
 				
