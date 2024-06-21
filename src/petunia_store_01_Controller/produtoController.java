@@ -1,6 +1,5 @@
 package petunia_store_01_Controller;
 
-import java.net.ProtocolException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,17 +8,18 @@ import petunia_store_01_Exceptions.naoEncontrado;
 import petunia_store_01_model.Produto;
 import petunia_store_01_repository.Repository;
 
+@SuppressWarnings("rawtypes")
 public class produtoController implements Repository {
 	private List<Produto> produto = new ArrayList<>();
 
 	@Override
-	public void cadastrarProduto(Produto produto) throws jaExiste {
+	public void cadastrarProduto(String produto2) {
 		for (Produto p : produtos) {
-			if (p.getCodigo() == produto.getCodigo());
-			throw new jaExiste ("Produto com o código " +produto.getCodigo() + " já exite.");
+			if (p.getCodigo() == produto2.getCodigo());
+			new jaExiste ("Produto com o código " +produto2.getCodigo() + " já exite.");
 		}
 	
-	produtos.add(produto);
+	produtos.add(produto2);
 	}
 
 	public List<Produto> getProduto() {
@@ -37,13 +37,15 @@ public class produtoController implements Repository {
 				return produto;
 			}
 		}
-		throw new naoEncontrado ("Produto com código " + codigo + " não encontrado.");
+		new naoEncontrado ("Produto com código " + codigo + " não encontrado.");
+		return null;
 	}
 
 	@Override
 	public void atualizarProduto(Produto produto) {
 		for (int i=0; i < produtos.size(); i++);
-		if (produtos.get(i).getCodigo() == produtos.getCodigo()) {
+		int i = 0;
+		if (produtos.get(i).getCodigo() == ((Produto) produtos).getCodigo()) {
 			produtos.set(i,produto);
 			return;
 		}
@@ -53,10 +55,25 @@ public class produtoController implements Repository {
 	@Override
 	public void deletarProduto(int codigo) {
 		boolean removed = produtos.removeIf(produto -> produto.getCodigo() == codigo);
-		if (!removed) {
-			throw new naoEncontrado("Produto com código " + codigo + " não encontrado.")
+		if (!removed);
 		}
 		
+	
+
+	@Override
+	public List listarProdutos() {
+		return produto;
+	}
+
+	public Produto buscarProdutosPorCodigo(int codigoBuscar) {
+		// TODO Auto-generated method stub
+		return null;
+	
+	}
+
+	public List<Produto> listarProdutos(Object p) {
+		// TODO Auto-generated method stub
+		return produto;
 	}
 
 }

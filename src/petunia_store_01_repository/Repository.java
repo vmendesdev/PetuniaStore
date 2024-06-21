@@ -15,4 +15,6 @@ public interface Repository<produto> {
 	public void deletarProduto (int codigo);
 	
 	List<Produto> produtos = new ArrayList<>();
+
+	void cadastrarProduto(String produto2);
 }

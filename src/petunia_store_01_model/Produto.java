@@ -38,10 +38,16 @@ public abstract class Produto {
 		
 	}
 
+	public Produto(Float codigo, String nome, double preco, String marca) {
+		// TODO Auto-generated constructor stub
+	}
+
 	@Override
 	public String toString() {
 		return "Produto [codigo=" + codigo + ", nome=" + nome + ", preco=" + preco + "]";
 	}
+
+	protected abstract Object getCodigo1();
 	
 	
 }
